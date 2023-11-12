@@ -1,13 +1,8 @@
 pipeline {
     agent any
 
-    docker {
-            image 'node:16-alpine'
-            args '-u root'
-        }
-
     environment {
-        EMAIL_ADDRESS = credentials('dimeleone@gmail.com')
+        EMAIL_ADDRESS = 'dimeleone@gmail.com'
     }
 
     stages {

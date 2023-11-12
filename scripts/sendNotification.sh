@@ -1,1 +1,1 @@
-echo 'Email content' | mail -s 'Subject' $EMAIL_ADDRESS
+echo "Email content" | mail -s "subject: Pipeline executada com sucesso!" $EMAIL_ADDRESS

@@ -26,17 +26,17 @@ A pipeline CI/CD foi desenvolvida usando o Jenkins e está dividida em 3 etapas:
 
 ## Setup jenkins
 
+1. Construindo uma imagem docker com dockerfile:
 ```
-docker build -t s107-jenkins-node ./docker/jenkins
+docker build -t s107-jenkins-node ./docker/jenkins 
+```
 
+2. Executar o container:
+```
 docker-compose -f docker-compose-jenkins.yaml up -d
+```
+
+3. Parar e excluir o container:
+```
 docker-compose -f docker-compose-jenkins.yaml down --volumes
-
-curl -O http://localhost:8080/jnlpJars/jenkins-cli.jar
-docker cp ./jenkins-cli.jar jenkins:/var/jenkins_home/jenkins-cli.jar
-docker cp Jenkinsfile jenkins:/var/jenkins_home/Jenkinsfile
-
-docker exec -it jenkins bash
-java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080/ get-credentials
-java -jar /var/jenkins_home/jenkins-cli.jar -s http://localhost:8080/ reload-configuration
 ```

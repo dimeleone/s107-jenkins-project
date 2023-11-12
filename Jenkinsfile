@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:16-alpine'
+            args '-u root'
+        }
+    }
 
     environment {
         EMAIL_ADDRESS = credentials('dimeleone@gmail.com')

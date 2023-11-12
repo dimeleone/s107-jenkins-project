@@ -23,7 +23,11 @@ pipeline {
         stage('Notification') {
             steps {
                 script {
-                    sh './scripts/sendNotification.sh $EMAIL_ADDRESS'
+                    sh '''
+                    cd scripts/
+                    chmod 775 *
+                    ./sendNotification.sh $EMAIL_ADDRESS
+                   '''
                 }
             }
         }

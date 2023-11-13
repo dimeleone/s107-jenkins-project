@@ -33,6 +33,8 @@ Git Bash (Git for Windows): https://gitforwindows.org/
 
 Docker (Docker Desktop for Windows): https://docs.docker.com/get-docker/
 
+Node.js: https://nodejs.org/en/
+
 ---
 
 ## 📁 Personal Access Token (PAT)
@@ -93,7 +95,33 @@ Com o docker aberto, acesse o endereço abaixo no seu navegador:
 http://localhost:8080/
 ```
 
-Agora siga os passos abaixo:
+Uma senha inicial de administrador será requisitada.
+<img alt="Jenkins 1" src="https://i.imgur.com/rxElcbk.png" />
+
+Para obter essa senha vá no seu Docker e clique em "jenkins":
+<img alt="Jenkins 1" src="https://i.imgur.com/n6SQgjK.png" />
+
+Depois selecione a opção "Files" e entre na pasta "var", depois "jenkins_home", seguida por "secrets" e encontrará um arquivo denominado "initialAdminPassword". Clique do outro lado do mouse em cima dele e selecione a opção "Edit file". A senha será exibida. 
+<img alt="Jenkins 1" src="https://i.imgur.com/4MoGQSd.png" />
+
+Após copiar e colar a senha clique em "Continue".
+
+No próximo passo selecione a opção "Install suggested plugins".
+<img alt="Jenkins 1" src="https://i.imgur.com/OgJfnZA.png" />
+
+Aguarde ao término da instalação.
+<img alt="Jenkins 1" src="https://i.imgur.com/49NKUCr.png" />
+
+Na próxima etapa você pode clicar em "Skip and continue as admin".
+<img alt="Jenkins 1" src="https://i.imgur.com/a2LORyI.png" />
+
+E por fim clique em "Save and Finish".
+<img alt="Jenkins 1" src="https://i.imgur.com/nDo1Lki.png" />
+
+---
+
+
+#### Para continuar com a configuração do Jenkins siga os passos abaixo:
 
 
 1. Clique em "Novo Item":

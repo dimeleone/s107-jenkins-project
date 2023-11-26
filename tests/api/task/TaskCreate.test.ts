@@ -1,5 +1,10 @@
+import mongoose from "mongoose";
 import request from "supertest";
 import app from "../../../src/app";
+
+afterAll(async () => {
+  await mongoose.connection.close()
+})
 
 describe("Test - Create Task", () => {
   const TASK_ENDPOINT = "/api/task";

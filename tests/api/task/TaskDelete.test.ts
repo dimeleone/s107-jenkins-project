@@ -3,6 +3,10 @@ import request from "supertest";
 import app from "../../../src/app";
 import { Task } from "../../../src/models/Task";
 
+afterAll(async () => {
+  await mongoose.connection.close()
+})
+
 describe("Test - Delete Task", () => {
   let createdTask: Task;
   const TASK_ENDPOINT = "/api/task";

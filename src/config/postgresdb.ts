@@ -13,7 +13,6 @@ export default class PostgresDbConnection {
     client
       .connect()
       .then(() => {
-        console.log("Connected to PostgreSQL");
         this.createLogTable(client);
       })
       .catch((error: Error) => {
@@ -31,7 +30,6 @@ export default class PostgresDbConnection {
           timestamp TIMESTAMP DEFAULT NOW()
         )
       `);
-      console.log("Log table created successfully");
     } catch (error) {
       console.error("Error creating log table:", error);
     } finally {

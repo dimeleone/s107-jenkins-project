@@ -16,21 +16,21 @@ pipeline {
 
         stage('Start MongoDB') {
             steps {
-                sh 'docker-compose -f docker-compose-jenkins.yaml pull mongo'
-                sh 'docker-compose -f docker-compose-jenkins.yaml up --wait mongo'
+                sh 'docker compose -f docker-compose-jenkins.yaml pull mongo'
+                sh 'docker compose -f docker-compose-jenkins.yaml up --wait mongo'
             }
         }
 
         stage('Start Postgres') {
             steps {
-                sh 'docker-compose -f docker-compose-jenkins.yaml pull postgres'
-                sh 'docker-compose -f docker-compose-jenkins.yaml up --wait postgres'
+                sh 'docker compose -f docker-compose-jenkins.yaml pull postgres'
+                sh 'docker compose -f docker-compose-jenkins.yaml up --wait postgres'
             }
         }
 
         stage('Tests') {
             steps {
-                sh 'docker-compose -f docker-compose-jenkins.yaml run jest-tests'
+                sh 'docker compose -f docker-compose-jenkins.yaml run jest-tests'
             }
         }
 

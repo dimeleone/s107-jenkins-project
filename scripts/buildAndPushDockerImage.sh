@@ -7,7 +7,7 @@ set -e
 set -u
 
 # Buildar a imagem docker do jenkins
-docker build -t s107-jenkins-node:latest ./docker/jenkins
+docker build -t s107-jenkins-node:latest ./docker/jenkins --no-cache
 
 # Fazer login no dockerhub (É necessário passar o token de acesso ao executar o script)
 echo $1 | docker login --username dimeleone --password-stdin

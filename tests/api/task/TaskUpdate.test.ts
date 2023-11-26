@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import request from "supertest";
 import app from "../../../src/app";
 import { Task } from "../../../src/models/Task";
@@ -80,6 +81,7 @@ describe("Test - Update Task", () => {
   });
 
   it("should return 404 if task is not found", async () => {
+    const invalidId = new mongoose.Types.ObjectId().toString();
     const updatedTask = {
       title: "Updated Test Task",
       description: "This task has been updated",
@@ -87,7 +89,7 @@ describe("Test - Update Task", () => {
     };
 
     const res = await request(app)
-      .patch(`${TASK_ENDPOINT}/1234`)
+      .patch(`${TASK_ENDPOINT}/${invalidId}`)
       .send(updatedTask);
 
     expect(res.status).toBe(404);

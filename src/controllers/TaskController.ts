@@ -1,58 +1,91 @@
 import { Request, Response } from "express";
 import TaskRepository from "../repositories/TaskRepository";
+import LogRepository from "../repositories/LogRespository";
 
 export default class TaskController {
   private taskRepository: TaskRepository;
+  private logRepository: LogRepository;
 
   constructor() {
     this.taskRepository = new TaskRepository();
+    this.logRepository = new LogRepository();
   }
 
   async getAllTasks(req: Request, res: Response) {
-    const tasks = await this.taskRepository.getAllTasks();
-    return res.json(tasks);
+    try {
+      const tasks = await this.taskRepository.getAllTasks();
+      return res.json(tasks);
+    } catch (err) {
+      const error = err as Error;
+      this.logRepository.insert(error.message);
+      return res.status(500).json({ message: error.message });
+    }
   }
 
   async getTaskById(req: Request, res: Response) {
-    const taskId = req.params.id;
+    try {
+      const taskId = req.params.id;
 
-    const task = await this.taskRepository.getTaskById(taskId);
+      const task = await this.taskRepository.getTaskById(taskId);
 
-    if (!task) {
-      return res.status(404).json({ message: "Task not found" });
+      if (!task) {
+        return res.status(404).json({ message: "Task not found" });
+      }
+
+      return res.json(task);
+    } catch (err) {
+      const error = err as Error;
+      this.logRepository.insert(error.message);
+      return res.status(500).json({ message: error.message });
     }
-
-    return res.json(task);
   }
 
   async createTask(req: Request, res: Response) {
-    const task = req.body;
-    const createdTask = await this.taskRepository.createTask(task);
-    return res.status(201).json(createdTask);
+    try {
+      const task = req.body;
+      const createdTask = await this.taskRepository.createTask(task);
+      return res.status(201).json(createdTask);
+    } catch (err) {
+      const error = err as Error;
+      this.logRepository.insert(error.message);
+      return res.status(500).json({ message: error.message });
+    }
   }
 
   async updateTask(req: Request, res: Response) {
-    const taskId = req.params.id;
-    const updatedTask = req.body;
+    try {
+      const taskId = req.params.id;
+      const updatedTask = req.body;
 
-    const result = await this.taskRepository.updateTask(taskId, updatedTask);
+      const result = await this.taskRepository.updateTask(taskId, updatedTask);
 
-    if (!result) {
-      return res.status(404).json({ message: "Task not found" });
+      if (!result) {
+        return res.status(404).json({ message: "Task not found" });
+      }
+
+      return res.json(result);
+    } catch (err) {
+      const error = err as Error;
+      this.logRepository.insert(error.message);
+      return res.status(500).json({ message: error.message });
     }
-
-    return res.json(result);
   }
 
   async deleteTask(req: Request, res: Response) {
-    const taskId = req.params.id;
+    try {
+      const taskId = req.params.id;
 
-    const result = await this.taskRepository.deleteTask(taskId);
+      const result = await this.taskRepository.deleteTask(taskId);
 
-    if (!result) {
-      return res.status(404).json({ message: "Task not found" });
+      if (!result) {
+        return res.status(404).json({ message: "Task not found" });
+      }
+
+      return res.status(204).json();
+    } catch (err) {
+      const error = err as Error;
+      this.logRepository.insert(error.message);
+      return res.status(500).json({ message: error.message });
     }
-
-    return res.status(204).json();
   }
 }

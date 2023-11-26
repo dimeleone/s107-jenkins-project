@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import request from "supertest";
 import app from "../../../src/app";
 import { Task } from "../../../src/models/Task";
@@ -24,7 +25,8 @@ describe("Test - Delete Task", () => {
   });
 
   it("should return 404 if task is not found", async () => {
-    const res = await request(app).delete(`${TASK_ENDPOINT}/1234`);
+    const invalidId = new mongoose.Types.ObjectId().toString();
+    const res = await request(app).delete(`${TASK_ENDPOINT}/${invalidId}`);
 
     expect(res.status).toBe(404);
     expect(res.body.message).toBe("Task not found");

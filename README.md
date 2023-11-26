@@ -14,14 +14,17 @@ Endpoints:
 - POST /api/task - Cria uma nova tarefa.
 - PATCH /api/task/:id - Atualiza uma tarefa.
 - DELETE /api/task/:id - Deleta uma tarefa.
+- GET /api/log - Lista todos os logs.
 
 ---
 
 ## 💻 Sobre a pipeline CI/CD
 
-A pipeline CI/CD foi desenvolvida utilizando o Jenkins e está dividida em 3 etapas:
+A pipeline CI/CD foi desenvolvida utilizando o Jenkins e está dividida em 5 etapas:
 
 - Build: realizado o build do projeto, compilando o typescript e gerando o javascript.
+- Start MongoDB: iniciado o container do MongoDB.
+- Start Postgres: iniciado o container do Postgres.
 - Tests: executado o teste do projeto, rodando os testes da aplicação.
 - Notification: envio de um e-mail com o resultado da pipeline.
 
@@ -71,18 +74,17 @@ npm start
 npm test
 ```
 
-
-1. Construindo uma imagem docker com dockerfile:
+2. Construindo a imagem docker do jenkins e publicando no dockerhub:
 ```
-docker build -t s107-jenkins-node ./docker/jenkins 
-```
-
-2. Executar o container:
-```
-docker-compose -f docker-compose-jenkins.yaml up -d
+./scrips/buildAndPushDockerImage.sh <docker-hub-access-token>
 ```
 
-3. Execute o passo a seguir APENAS se quiser parar e excluir o container:
+3. Executando o container do jenkins:
+```
+docker-compose -f docker-compose-jenkins.yaml up jenkins -d
+```
+
+4. Execute o passo a seguir APENAS se quiser parar e excluir o container:
 ```
 docker-compose -f docker-compose-jenkins.yaml down --volumes
 ```

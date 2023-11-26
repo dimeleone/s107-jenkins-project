@@ -1,11 +1,17 @@
+# Usando a imagem do node 18.3.0-alpine3.14
 FROM node:18.3.0-alpine3.14
 
+# Definindo o diretório de trabalho
 WORKDIR /app
 
+# Copiando os arquivos package.json e package-lock.json
 COPY package*.json ./
 
+# Instalando as dependências
 RUN npm install
 
+# Copiando os arquivos do projeto
 COPY . .
 
+# Executando os testes
 CMD ["npm", "run", "test"]

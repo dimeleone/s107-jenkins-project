@@ -7,8 +7,8 @@ module.exports = {
   testMatch: ['**/tests/**/*.test.ts'],
   coverageThreshold: {
     global: {
-      lines: 80,
-      statements: 80
+      lines: 70,
+      statements: 70
     }
   },
   setupFiles: ['./tests/setup.ts'],

@@ -30,6 +30,8 @@ pipeline {
 
         stage('Tests') {
             steps {
+                sh 'docker compose -f docker-compose-jenkins.yaml pull jest-tests'
+                sh 'docker compose -f docker-compose-jenkins.yaml build jest-tests --no-cache'
                 sh 'docker compose -f docker-compose-jenkins.yaml run jest-tests'
             }
         }

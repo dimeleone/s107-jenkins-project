@@ -76,7 +76,7 @@ npm test
 
 2. Construindo a imagem docker do jenkins e publicando no dockerhub:
 ```
-./scrips/buildAndPushDockerImage.sh <docker-hub-access-token>
+./scripts/buildAndPushDockerImage.sh <docker-hub-access-token>
 ```
 
 3. Executando o container do jenkins:

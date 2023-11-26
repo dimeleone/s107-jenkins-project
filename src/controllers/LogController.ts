@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import LogRepository from "../repositories/LogRespository";
 
-export default class TaskController {
+export default class LogController {
   private logRepository: LogRepository;
 
   constructor() {
